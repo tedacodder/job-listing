@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import MyImage from "../assets/job1.png";
 
 interface props {
   title: string;
@@ -10,6 +10,7 @@ interface props {
   description: string;
   categories: string[];
   onClick: () => void;
+  opType: string;
 }
 const Card = ({
   title,
@@ -19,6 +20,7 @@ const Card = ({
   description,
   categories,
   onClick,
+  opType,
 }: props) => {
   const colors = [
     "border-yellow-400 text-yellow-400",
@@ -36,12 +38,10 @@ const Card = ({
       >
         {/* Avatar / Logo */}
         <div className="flex">
-          <Image
-            src={"/image" + img_url}
+          <img
+            src={img_url && img_url.trim() !== "" ? img_url : MyImage.src}
             alt={title}
-            width={60}
-            height={60}
-            className=" rounded-full object-cover  "
+            className=" w-15 h-15 rounded-full object-cover  "
           />
           {/* Job Title */}
           <h1 className="text-yellow-400 text-lg font-semibold  mx-3">
@@ -56,7 +56,7 @@ const Card = ({
         <p className="text-sm  text-left ml-10">{description}</p>
         <div className="gap-2 ml-10">
           <span className="text-green-600 bg-green-200 p-1.5 ml-1 border  rounded-full hover:bg-amber-300 hover:text-amber-50 hover:shadow-md ">
-            In person
+            {opType}
           </span>
           <span className="w-px h-6 border-gray-500"></span>
           {categories.map((value) => (
